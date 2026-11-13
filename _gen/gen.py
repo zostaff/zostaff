@@ -132,7 +132,7 @@ def pill(cols, rows, L=None, R=None, ang=40):
             elif abs(u) < 0.55:
                 row.append(("/" if j % 2 else "\\", "#2a3a31"))
             elif v > R * 0.42 and abs(u) < L * 0.8:
-                row.append(("." if green else "'", "#eafff1" if green else "#ffffff"))
+                row.append(("#" if green else "=", "#9dffc4" if green else "#ffffff"))
             else:
                 row.append(("#" if green else "=", G1 if green else WHITE))
         out.append(row)
@@ -205,16 +205,16 @@ def banner(D):
             f'<filter id="gb" x="-10%" y="-30%" width="120%" height="160%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
             f'<clipPath id="bc"><rect x="70" y="341" width="0" height="26"><animate attributeName="width" values="0;{bar_len*12.6:.0f}" dur="3.2s" begin="0.6s" fill="freeze"/></rect></clipPath>'
             f'<pattern id="ln" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#000" opacity=".35"/></pattern></defs>'
-            f'<style>{style}</style><rect width="{W}" height="{H}" fill="#060807"/>{dots}'
-            f'<g class="r">{ghost_r}</g><g class="c">{ghost_g}</g><g class="t" filter="url(#gb)">{big}</g>'
-            f'{t(72, 318, "> zostaff · quant dev in the pump.fun trenches", 24, TXT)}'
-            f'<rect class="cur" x="742" y="299" width="13" height="24" fill="{G1}"/>'
+            f'<style>{style}</style><rect width="{W}" height="{H}" fill="#060807"/>'
+            f'<g class="r">{ghost_r}</g><g class="c">{ghost_g}</g><g class="t">{big}</g>'
+            f'{t(72, 318, "> zostaff, quant dev in the pump.fun trenches", 26, TXT)}'
+            f'<rect class="cur" x="782" y="297" width="14" height="26" fill="{G1}"/>'
             f'{t(70, 360, "░" * bar_len, 21, "#1b2a21")}<g clip-path="url(#bc)">{t(70, 360, bar, 21, "url(#bg)")}</g>'
-            f'<text x="460" y="360" font-size="17" fill="{MUTED}">bonding curve <tspan fill="{G1}" opacity="0">100% · MIGRATED{fade(3.8)}</tspan></text>'
-            f'{t(72, 410, "$ buy the curve · sell the migration · never marry a bag", 17, MUTED)}'
+            f'<text x="460" y="360" font-size="20" fill="{MUTED}">bonding curve <tspan fill="{G1}" opacity="0">100%, migrated{fade(3.8)}</tspan></text>'
+            f'{t(72, 410, "$ buy the curve, sell the migration, never marry a bag", 20, "#9fb0a6")}'
             f'{pl}{av}'
             f'<text x="1440" y="470" font-size="18" font-weight="700" fill="{WHITE}" text-anchor="end" font-family="{SANS}">dyor, mfers</text>'
-            f'<rect class="scan" x="0" y="0" width="{W}" height="70" fill="url(#sl)"/><rect width="{W}" height="{H}" fill="url(#ln)"/></svg>')
+            f'</svg>')
 
 
 # ---------------------------------------------------------------- profile
@@ -224,7 +224,7 @@ def profile(D):
     n = len(line) + 2
     widths = ";".join(str(round(k * cw)) for k in range(n + 1))
     end = 32 + round(n * cw) + 4
-    cols = [("(Trenches)", "pump.fun · Solana · Polymarket"),
+    cols = [("(Trenches)", "pump.fun / Solana / Polymarket"),
             ("(Top repo)", f"{D['top'][0]} ★{D['top'][1]}"),
             ("(Stars earned)", f"{D['stars']} across {D['repos']} repos")]
     c = ""
@@ -239,7 +239,7 @@ def profile(D):
             + head("[ profile ]", "")
             + f'<text x="430" y="42" fill="{MUTED}" font-size="13" text-anchor="middle">github.com/zostaff</text>'
             f'<circle class="dot" cx="776" cy="38" r="5" fill="{G1}"/><text x="828" y="42" fill="#b8c8be" font-size="13" text-anchor="end">live</text>'
-            f'<text x="30" y="132" font-size="72" font-weight="900" font-family="{SANS}" fill="url(#pc)" filter="url(#gl)" letter-spacing="-2">zostaff</text>'
+            f'<text x="30" y="132" font-size="72" font-weight="900" font-family="{SANS}" fill="url(#pc)" letter-spacing="-2">zostaff</text>'
             f'<g clip-path="url(#tc)"><text x="32" y="176" fill="{TXT}" font-size="18"><tspan fill="{G1}">&gt;</tspan> {escape(line)}</text></g>'
             f'<rect class="cur" x="{end}" y="161" width="10" height="20" fill="{G2}"/>'
             f'<line x1="32" y1="206" x2="828" y2="206" stroke="{LINE}"/>{c}')
@@ -251,11 +251,11 @@ def terminal(D):
     word = block("ZOSTAFF")
     s = ""
     for r, line in enumerate(word):
-        s += (f'<text x="24" y="{80 + r*15}" font-size="15.2" letter-spacing="-0.6" fill="url(#pc)" filter="url(#gl)" '
+        s += (f'<text x="24" y="{80 + r*15}" font-size="15.2" letter-spacing="-0.6" fill="url(#pc)" '
               f'xml:space="preserve" opacity="0">{escape(line)}{fade(0.1 + r*0.1)}</text>')
     s += f'<g class="oc">{art_rows(pill(26, 11), 630, 70, 13, 14.2, begin=0.8, step=0.06)}</g>'
     cmds = [
-        ("$ whoami", "zostaff · quant dev, memecoin degen, ships at 4am"),
+        ("$ whoami", "zostaff, quant dev and memecoin degen, ships at 4am"),
         ("$ ls ~/bots", "grokbot-pumpfun  pumpfunbots-reverse  firstkiller  pumpnuke  curvegap"),
         ("$ cat strategy.txt", "buy the curve, sell the migration, never marry a bag"),
         ("$ echo $PNL", "up only (unverified)"),
@@ -292,7 +292,7 @@ def stats(D):
         s += (f'<text x="458" y="{y}" fill="#f4fff8" font-size="13" font-weight="700">{escape(name)}</text>'
               f'<text x="828" y="{y}" fill="{MUTED}" font-size="12" text-anchor="end">{pct:.1f}%</text>'
               f'<text x="458" y="{y+20}" font-size="13" xml:space="preserve"><tspan fill="{MUTED}">[</tspan>'
-              f'<tspan fill="url(#pc)">{"#" * on}</tspan><tspan fill="#26332b">{"·" * (cells - on)}</tspan><tspan fill="{MUTED}">]</tspan></text>')
+              f'<tspan fill="url(#pc)">{"#" * on}</tspan><tspan fill="#26332b">{"-" * (cells - on)}</tspan><tspan fill="{MUTED}">]</tspan></text>')
     s += f'<text x="32" y="306" fill="#3e4a43" font-size="10">updated {D["updated"]}</text>'
     return card(860, 328, s)
 
@@ -302,8 +302,8 @@ def activity(D):
     weeks = D["weeks"]
     s = head("[ activity ]", "last 12 months")
     lv = lambda n: 0 if n == 0 else 1 if n <= 2 else 2 if n <= 5 else 3 if n <= 9 else 4
-    chars = ["·", "░", "▒", "▓", "█"]
-    cols = ["#1a231e", "#11663e", "#1ea862", G1, G2]
+    chars = ["░", "░", "▒", "▓", "█"]
+    cols = ["#151c18", "#11663e", "#1ea862", G1, G2]
     x0, y0, dx, dy = 78, 108, 13.3, 14.2
     last_m = None
     for wi, w in enumerate(weeks):
